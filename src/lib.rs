@@ -23,6 +23,7 @@
 //! ### derive EnvConfig
 //!
 //! ```rust
+//! use dotenv::dotenv;
 //! use dotenv_config::EnvConfig;
 //!
 //! #[derive(Debug, EnvConfig)]
@@ -37,6 +38,7 @@
 //! }
 //!
 //! fn main() {
+//!     dotenv().ok();
 //!     let cfg = Config::init().unwrap();
 //!     println!("{:#?}", cfg);
 //! }
@@ -68,7 +70,6 @@
 //! If you have some problems please go to github create a issue.
 //! https://github.com/zinclabs/dotenv-config
 //!
-extern crate proc_macro;
 
 use proc_macro::TokenStream;
 mod builder;

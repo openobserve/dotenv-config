@@ -1,15 +1,11 @@
 impl {{ name }} {
     pub fn init() -> Result<{{ name }}, &'static str> {
-        use convert_case::{Case, Casing};
-
-        dotenv::dotenv().ok();
-
-        let mut key: String;
+        let mut key: &str;
         {% for field in fields %}
         {% if field.attr_name.is_empty() %}
-        key = "{{ name }} {{ field.name }}".to_case(Case::UpperSnake);
+        key = "{{ uppersnake((name.clone() + "_" + field.name.as_str()).as_str()) }}";
         {% else %}
-        key = "{{ field.attr_name }}".to_case(Case::UpperSnake);
+        key = "{{ uppersnake(field.attr_name.as_str()) }}";
         {% endif %}
         {% if contains(["i32","i64","u32","u64","f32","f64","String","bool"], field.typ) %}
         let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {

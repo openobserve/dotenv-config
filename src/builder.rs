@@ -15,6 +15,7 @@
 
 use anyhow::Result;
 use askama::Template;
+use convert_case::{Case, Casing};
 use proc_macro::{Ident, TokenStream, TokenTree};
 use std::collections::VecDeque;
 
@@ -24,6 +25,7 @@ pub struct BuilderContext {
     name: String,
     fields: Vec<Fd>,
     contains: fn(haystack: &[&str], needle: &str) -> bool,
+    uppersnake: fn(s: &str) -> String,
 }
 
 #[derive(Debug, Default)]
@@ -113,6 +115,7 @@ impl BuilderContext {
             name: name.to_string(),
             fields,
             contains: |haystack, needle| haystack.contains(&needle),
+            uppersnake: |s| s.to_case(Case::UpperSnake),
         }
     }
 

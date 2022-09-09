@@ -7,6 +7,7 @@ use `.env` as config file and parse environments to config struct.
 ### derive EnvConfig
 
 ```rust
+use dotenv::dotenv;
 use dotenv_config::EnvConfig;
 
 #[derive(Debug, EnvConfig)]
@@ -21,6 +22,7 @@ struct Config {
 }
 
 fn main() {
+    dotenv().ok();
     let cfg = Config::init().unwrap();
     println!("{:#?}", cfg);
 }

@@ -2,8 +2,18 @@
 name = "env_config"
 version = "0.1.0"
 edition = "2021"
+authors = [
+  "Hengfei Yang <hengfei.yang@gmail.com>",
+]
+homepage = "https://github.com/zinclabs/env-config/"
+repository = "https://github.com/zinclabs/env-config/"
+documentation = "https://docs.rs/env_config"
+keywords = ["environment", "env", "dotenv", "settings", "config"]
+readme = "README.md"
+license = "MIT"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[examples]]
+name = "config"
 
 [lib]
 proc-macro = true

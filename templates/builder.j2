@@ -7,7 +7,7 @@ impl {{ name }} {
         {% else %}
         key = "{{ uppersnake(field.attr_name.as_str()) }}";
         {% endif %}
-        {% if contains(["i32","i64","u32","u64","f32","f64","String","bool"], field.typ) %}
+        {% if contains(["usize","i16","i32","i64","u16","u32","u64","f32","f64","String","bool"], field.typ) %}
         let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
             Ok(val) => match val.parse() {
                 Ok(v) => Some(v),

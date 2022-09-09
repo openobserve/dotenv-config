@@ -1,14 +1,14 @@
 [package]
-name = "env_config"
+name = "dotenv_config"
 version = "0.1.0"
 edition = "2021"
 authors = [
   "Hengfei Yang <hengfei.yang@gmail.com>",
 ]
 description = "parse `env` to config struct for Rust"
-homepage = "https://github.com/zinclabs/env-config/"
-repository = "https://github.com/zinclabs/env-config/"
-documentation = "https://docs.rs/env_config"
+homepage = "https://github.com/zinclabs/dotenv-config/"
+repository = "https://github.com/zinclabs/dotenv-config/"
+documentation = "https://docs.rs/dotenv_config"
 keywords = ["environment", "env", "dotenv", "settings", "config"]
 readme = "README.md"
 license = "MIT"

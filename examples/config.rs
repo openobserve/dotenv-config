@@ -1,4 +1,4 @@
-use env_config::EnvConfig;
+use dotenv_config::EnvConfig;
 
 #[derive(Debug, EnvConfig)]
 struct Config {

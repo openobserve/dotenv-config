@@ -13,7 +13,7 @@
 * limitations under the License.
  */
 
-//! env_config provides a way to read configuration from environment variables.
+//! dotenv_config provides a way to read configuration from environment variables.
 //!
 //!
 //! use `.env` as config file and parse environments to config struct.
@@ -23,7 +23,7 @@
 //! ### derive EnvConfig
 //!
 //! ```rust
-//! use env_config::EnvConfig;
+//! use dotenv_config::EnvConfig;
 //!
 //! #[derive(Debug, EnvConfig)]
 //! struct Config {
@@ -66,7 +66,7 @@
 //! ```
 //!
 //! If you have some problems please go to github create a issue.
-//! https://github.com/zinclabs/env_config
+//! https://github.com/zinclabs/dotenv-config
 //!
 extern crate proc_macro;
 

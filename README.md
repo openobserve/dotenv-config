@@ -1,4 +1,4 @@
-# Env Config
+# Dot Env Config
 
 use `.env` as config file and parse environments to config struct.
 
@@ -7,7 +7,7 @@ use `.env` as config file and parse environments to config struct.
 ### derive EnvConfig
 
 ```rust
-use env_config::EnvConfig;
+use dotenv_config::EnvConfig;
 
 #[derive(Debug, EnvConfig)]
 struct Config {

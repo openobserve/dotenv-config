@@ -5,6 +5,7 @@ edition = "2021"
 authors = [
   "Hengfei Yang <hengfei.yang@gmail.com>",
 ]
+description = "parse `env` to config struct for Rust"
 homepage = "https://github.com/zinclabs/env-config/"
 repository = "https://github.com/zinclabs/env-config/"
 documentation = "https://docs.rs/env_config"

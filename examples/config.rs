@@ -1,3 +1,4 @@
+use dotenv::dotenv;
 use dotenv_config::EnvConfig;
 
 #[derive(Debug, EnvConfig)]
@@ -22,6 +23,7 @@ struct Redis {
 }
 
 fn main() {
+    dotenv().ok();
     let cfg = Config::init().unwrap();
     println!("{:#?}", cfg);
 }

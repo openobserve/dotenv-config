@@ -1,5 +1,5 @@
-use dotenvy::dotenv;
 use dotenv_config::EnvConfig;
+use dotenvy::dotenv;
 
 #[derive(Debug, EnvConfig)]
 struct Config {

@@ -1,4 +1,4 @@
-use dotenv::dotenv;
+use dotenvy::dotenv;
 use dotenv_config::EnvConfig;
 
 #[derive(Debug, EnvConfig)]
@@ -27,5 +27,11 @@ fn test_config() {
     dotenv().ok();
     let cfg = Config::init().unwrap();
     assert!(cfg.server_addr == "192.168.2.1");
+    assert!(cfg.server_mode == false);
+    assert!(cfg.foo == false);
+    assert!(cfg.bar == Some(88888));
+    assert!(cfg.rr.addr == "");
+    assert!(cfg.rr.port == "");
+    assert!(cfg.rr.auth == "");
     assert!(cfg.rr.timeout == 30i32);
 }

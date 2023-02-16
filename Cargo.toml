@@ -1,6 +1,6 @@
 [package]
 name = "dotenv_config"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 authors = [
   "Hengfei Yang <hengfei.yang@gmail.com>",
@@ -21,6 +21,8 @@ proc-macro = true
 
 [dependencies]
 anyhow = "1"
-dotenv = "0.15.0"
 askama = "0.11.1"           # Type-safe, compiled Jinja-like templates for Rust
 convert_case = "0.6.0"      # Convert a string to snake_case, kebab-case, or camelCase
+
+[dev-dependencies]
+dotenvy = "0.15.6"

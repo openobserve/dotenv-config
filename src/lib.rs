@@ -23,7 +23,7 @@
 //! ### derive EnvConfig
 //!
 //! ```rust
-//! use dotenv::dotenv;
+//! use dotenvy::dotenv;
 //! use dotenv_config::EnvConfig;
 //!
 //! #[derive(Debug, EnvConfig)]

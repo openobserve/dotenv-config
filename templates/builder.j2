@@ -7,12 +7,23 @@ impl {{ name }} {
         {% else %}
         key = "{{ field.attr_name }}";
         {% endif %}
-        {% if contains(["usize","i16","i32","i64","u16","u32","u64","f32","f64","String","bool"], field.typ) %}
+        {% if contains(["usize","i16","i32","i64","u16","u32","u64","f32","f64","bool"], field.typ) %}
         let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
-            Ok(val) => match val.parse() {
+            Ok(val) => match val.to_lowercase().parse() {
                 Ok(v) => Some(v),
                 Err(_) => Some("".parse().unwrap()),
             },
+            Err(err) => {
+                {% if field.attr_default.is_empty() %}
+                Some(Default::default())
+                {% else %}
+                Some("{{ field.attr_default }}".parse().unwrap())
+                {% endif %}
+            }
+        };
+        {% else if field.typ == "String" %}
+        let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
+            Ok(val) => Some(val),
             Err(err) => {
                 {% if field.attr_default.is_empty() %}
                 Some(Default::default())

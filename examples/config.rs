@@ -3,7 +3,7 @@ use dotenvy::dotenv;
 
 #[derive(Debug, EnvConfig)]
 struct Config {
-    #[env_config(default = "192.168.2.1")]
+    #[env_config(name = "ZINC_SERVER_ADDR", default = "192.168.2.1")]
     server_addr: String,
     server_mode: bool,
     #[env_config(name = "ZINC_FOO", default = true)]

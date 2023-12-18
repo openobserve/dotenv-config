@@ -1,4 +1,24 @@
+
+
 impl {{ name }} {
+
+    // Method to get help messages as a HashMap, where the key is the field name and the 
+    // value is a tuple of the default value and help message.
+    pub fn get_help() -> std::collections::HashMap<&'static str, (&'static str, &'static str)> {
+        let mut help_map = std::collections::HashMap::new();
+        let mut key: &str;
+        
+        {% for field in fields %}
+        {% if field.attr_name.is_empty() %}
+        key = "{{ uppersnake((name.clone() + "_" + field.name.as_str()).as_str()) }}";
+        {% else %}
+        key = "{{ field.attr_name }}";
+        {% endif %}
+        help_map.insert(key, ("{{ field.attr_default }}", "{{ field.attr_help }}"));
+        {% endfor %}
+        help_map
+    }
+    
     pub fn init() -> Result<{{ name }}, &'static str> {
         let mut key: &str;
         {% for field in fields %}

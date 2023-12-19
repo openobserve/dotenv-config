@@ -4,17 +4,22 @@ impl {{ name }} {
 
     // Method to get help messages as a HashMap, where the key is the field name and the 
     // value is a tuple of the default value and help message.
-    pub fn get_help() -> std::collections::HashMap<&'static str, (&'static str, &'static str)> {
+    pub fn get_help() -> std::collections::HashMap<String, (String, Option<String>)> {
         let mut help_map = std::collections::HashMap::new();
-        let mut key: &str;
-        
+
         {% for field in fields %}
-        {% if field.attr_name.is_empty() %}
-        key = "{{ uppersnake((name.clone() + "_" + field.name.as_str()).as_str()) }}";
+        // If the field is a custom type, recursively get its help information.
+        {% if !contains(["usize", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64", "bool", "String"], field.typ)  %}
+            let nested_help = {{ field.typ }}::get_help();
+            for (nested_key, nested_value) in nested_help {
+                help_map.insert(nested_key, nested_value);
+            }
         {% else %}
-        key = "{{ field.attr_name }}";
+            // Handle primitive types
+            let key = "{{ field.attr_name }}".to_string();
+            let value = ("{{ field.attr_default }}".to_string(), Some("{{ field.attr_help }}".to_string()));
+            help_map.insert(key, value);
         {% endif %}
-        help_map.insert(key, ("{{ field.attr_default }}", "{{ field.attr_help }}"));
         {% endfor %}
         help_map
     }

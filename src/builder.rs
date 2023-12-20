@@ -35,6 +35,7 @@ struct Fd {
     optional: bool,
     attr_name: String,
     attr_default: String,
+    attr_help: String, // new field for storing documentation comments
 }
 
 impl Fd {
@@ -45,6 +46,7 @@ impl Fd {
         // find env_config Group
         let mut attr_name: String = String::from("");
         let mut attr_default: String = String::from("");
+        let mut attr_help: String = String::from("");
         for item in name {
             if let TokenTree::Group(g) = item {
                 let mut g = g.stream().into_iter();
@@ -61,6 +63,9 @@ impl Fd {
                                     }
                                     "default" => {
                                         attr_default = item.1;
+                                    }
+                                    "help" => {
+                                        attr_help = item.1;
                                     }
                                     _ => {}
                                 }
@@ -99,6 +104,7 @@ impl Fd {
                     optional,
                     attr_name,
                     attr_default,
+                    attr_help,
                 }
             }
             e => panic!("Expect ident, but got {:?}", e),

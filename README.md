@@ -17,7 +17,7 @@ struct Config {
     server_mode: bool,
     #[env_config(name = "ZINC_FOO", default = true)]
     foo: bool,
-    #[env_config(name = "ZINC_BAR", default = 123456)]
+    #[env_config(name = "ZINC_BAR", default = 123456, help = "this is for demo")]
     bar: Option<i64>,
 }
 
@@ -25,6 +25,10 @@ fn main() {
     dotenv().ok();
     let cfg = Config::init().unwrap();
     println!("{:#?}", cfg);
+
+    // print config help
+    let help = Config::get_help();
+    println!("{:#?}", help);
 }
 ```
 

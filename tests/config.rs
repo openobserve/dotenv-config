@@ -42,9 +42,9 @@ fn test_config() {
 
     let keys = help_keys.get("ZINC_BAR").unwrap();
     assert_eq!(keys.0, "123456"); // default value
-    assert_eq!(keys.1, ""); // help value
+    assert_eq!(keys.1, None); // help value
 
     let keys = help_keys.get("ZINC_FOO").unwrap();
     assert_eq!(keys.0, "true"); // default value
-    assert_eq!(keys.1, "foo is important"); // help value
+    assert_eq!(keys.1, Some("foo is important".to_string())); // help value
 }

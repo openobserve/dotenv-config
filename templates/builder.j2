@@ -17,7 +17,8 @@ impl {{ name }} {
         {% else %}
             // Handle primitive types
             let key = "{{ field.attr_name }}".to_string();
-            let value = ("{{ field.attr_default }}".to_string(), Some("{{ field.attr_help }}".to_string()));
+            let help = {% if field.attr_help.is_empty() %} None {% else %} Some("{{ field.attr_help }}".to_string()) {% endif %};
+            let value = ("{{ field.attr_default }}".to_string(), help);
             help_map.insert(key, value);
         {% endif %}
         {% endfor %}

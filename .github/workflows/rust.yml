@@ -13,7 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Remove some unused binary in the image to get more space
       - name: Remove unused tools
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -21,12 +20,16 @@ jobs:
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-      - uses: actions/checkout@v4
+      - name: Checkout project
+        uses: actions/checkout@v4
 
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: clippy, rustfmt
+
+      - name: Install Rust tools
+        run: |
+          rustup component add rustfmt clippy
+          cargo install cargo-audit cargo-outdated
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2

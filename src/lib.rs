@@ -12,7 +12,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
- 
+
 //! dotenv_config provides a way to read configuration from environment variables.
 //!
 //!

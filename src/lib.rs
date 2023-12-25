@@ -41,7 +41,7 @@
 //!     dotenv().ok();
 //!     let cfg = Config::init().unwrap();
 //!     println!("{:#?}", cfg);
-//! 
+//!
 //!     // print config help
 //!     let help = Config::get_help();
 //!     println!("{:#?}", help);

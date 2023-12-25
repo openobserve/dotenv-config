@@ -12,7 +12,8 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
  */
-
+ #![allow(clippy::needless_doctest_main)]
+ 
 //! dotenv_config provides a way to read configuration from environment variables.
 //!
 //!

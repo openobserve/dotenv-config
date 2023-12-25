@@ -26,7 +26,11 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
-          components: clippy,cargo-audit,cargo-outdated,rustfmt
+          components: clippy,rustfmt
+
+      - name: Install Rust tools
+        run: |
+          cargo install cargo-audit cargo-outdated
 
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2

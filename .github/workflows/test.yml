@@ -1,4 +1,4 @@
-name: Build and Test
+name: Cross Build
 
 on:
   push:
@@ -74,15 +74,6 @@ jobs:
         uses: Swatinem/rust-cache@v2
         with:
           shared-key: "rust"
-
-      - name: Build binary
-        uses: houseabsolute/actions-rust-cross@v0
-        with:
-          command: "build"
-          target: ${{ matrix.platform.target }}
-          toolchain: ${{ matrix.toolchain }}
-          args: "--release"
-          strip: false
 
       - if: ${{ !matrix.platform.skip_tests }}
         name: Run tests

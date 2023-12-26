@@ -51,7 +51,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Setup Rust toolchain
-        uses: dtolnay/rust-toolchain@${{ matrix.toolchain }}
+        uses: dtolnay/rust-toolchain@\${{ matrix.toolchain }}
         with:
           targets: ${{ matrix.target }}
 

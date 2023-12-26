@@ -67,12 +67,14 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Cache cargo & target directories
-        uses: Swatinem/rust-cache@v2
-
       - if: contains(matrix.platform.target, 'musl')
         name: Install musl-tools on Linux
         run: sudo apt-get update --yes && sudo apt-get install --yes musl-tools
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: "rust"
 
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0

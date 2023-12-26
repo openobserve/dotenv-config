@@ -47,9 +47,6 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Setup Rust cache
-        uses: Swatinem/rust-cache@v2
-
       - name: Setup Rust toolchain for stable
         if: matrix.toolchain == 'stable'
         uses: dtolnay/rust-toolchain@stable
@@ -72,6 +69,11 @@ jobs:
         run: |
           rustup component add rustfmt clippy
           cargo install cargo-audit cargo-outdated
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: "rust"
 
       - name: Check formatting
         run: cargo fmt -- --check

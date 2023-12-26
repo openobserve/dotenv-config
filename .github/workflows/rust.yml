@@ -2,9 +2,20 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "main"
+    paths-ignore:
+      - "**.md"
+      - LICENSE
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - "*"
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+  workflow_dispatch:
+  release:
+    types: [published, edited]
 
 env:
   CARGO_TERM_COLOR: always
@@ -21,6 +32,10 @@ jobs:
             target: x86_64-apple-darwin
           - os: windows-latest
             target: x86_64-pc-windows-msvc
+        toolchain:
+          - stable
+          - beta
+          - nightly
     runs-on: ${{ matrix.os }}
     steps:
       - name: Remove unused tools
@@ -35,7 +50,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust toolchain
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@${{ matrix.toolchain }}
         with:
           targets: ${{ matrix.target }}
 

@@ -2,9 +2,7 @@
 name = "dotenv_config"
 version = "0.1.7"
 edition = "2021"
-authors = [
-  "Hengfei Yang <hengfei.yang@gmail.com>",
-]
+authors = ["Hengfei Yang <hengfei.yang@gmail.com>"]
 description = "parse `env` to config struct for Rust"
 homepage = "https://github.com/openobserve/dotenv-config/"
 repository = "https://github.com/openobserve/dotenv-config/"
@@ -13,16 +11,13 @@ keywords = ["environment", "env", "dotenv", "settings", "config"]
 readme = "README.md"
 license = "MIT"
 
-[[examples]]
-name = "config"
-
 [lib]
 proc-macro = true
 
 [dependencies]
 anyhow = "1"
-askama = "0.12.1"           # Type-safe, compiled Jinja-like templates for Rust
-convert_case = "0.6.0"      # Convert a string to snake_case, kebab-case, or camelCase
+askama = "0.12.1"      # Type-safe, compiled Jinja-like templates for Rust
+convert_case = "0.6.0" # Convert a string to snake_case, kebab-case, or camelCase
 
 [dev-dependencies]
 dotenvy = "0.15.6"

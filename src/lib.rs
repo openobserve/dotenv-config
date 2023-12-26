@@ -31,16 +31,16 @@
 //!     #[env_config(default = "192.168.2.1")]
 //!     server_addr: String,
 //!     server_mode: bool,
-//!     #[env_config(name = "ZINC_FOO", default = true)]
-//!     foo: bool,
-//!     #[env_config(name = "ZINC_BAR", default = 123456)]
-//!     bar: Option<i64>,
+//!     #[env_config(name = "ZINC_ENABLE", default = true)]
+//!     enable: bool,
+//!     #[env_config(name = "ZINC_NUMBER", default = 123456)]
+//!     num: Option<i64>,
 //! }
 //!
 //! dotenv().ok();
 //! let cfg = Config::init().unwrap();
 //! println!("{:#?}", cfg);
-//! 
+//!
 //! // print config help
 //! let help = Config::get_help();
 //! println!("{:#?}", help);
@@ -56,8 +56,8 @@
 //! ## you can though system environments or `.env` file config it.
 //!
 //! ```ignore
-//! ZINC_FOO=false
-//! ZINC_BAR=8787878
+//! ZINC_ENABLE=false
+//! ZINC_NUMBER=8787878
 //! ```
 //!
 //! default load environment key is: `structName_fieldName` do UpperSnake, like above struct, default config key is:
@@ -65,8 +65,8 @@
 //! ```ignore
 //! CONFIG_SERVER_ADDR
 //! CONFIG_SERVER_MODE
-//! ZINC_FOO
-//! ZINC_BAR
+//! ZINC_ENABLE
+//! ZINC_NUMBER
 //! ```
 //!
 //! If you have some problems please go to github create a issue.

@@ -50,8 +50,21 @@ jobs:
       - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
 
-      - name: Setup Rust toolchain
-        uses: dtolnay/rust-toolchain@\${{ matrix.toolchain }}
+      - name: Setup Rust toolchain for stable
+        if: matrix.toolchain == 'stable'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Setup Rust toolchain for beta
+        if: matrix.toolchain == 'beta'
+        uses: dtolnay/rust-toolchain@beta
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Setup Rust toolchain for nightly
+        if: matrix.toolchain == 'nightly'
+        uses: dtolnay/rust-toolchain@nightly
         with:
           targets: ${{ matrix.target }}
 

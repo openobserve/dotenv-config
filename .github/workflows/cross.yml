@@ -81,7 +81,7 @@ jobs:
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.toolchain }}
           args: "--release"
-          strip: true
+          strip: false
 
       - if: ${{ !matrix.platform.skip_tests }}
         name: Run tests

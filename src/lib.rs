@@ -36,6 +36,14 @@
 //!     #[env_config(name = "ZINC_BAR", default = 123456)]
 //!     bar: Option<i64>,
 //! }
+//!
+//! dotenv().ok();
+//! let cfg = Config::init().unwrap();
+//! println!("{:#?}", cfg);
+//! 
+//! // print config help
+//! let help = Config::get_help();
+//! println!("{:#?}", help);
 //! ```
 //!
 //! ### attribute env_config

@@ -1,0 +1,85 @@
+name: Cross Test
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+  pull_request:
+    branches:
+      - "*"
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+  workflow_dispatch:
+  release:
+    types: [published, edited]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  test:
+    name: ${{ matrix.platform.os_name }} with rust ${{ matrix.toolchain }}
+    runs-on: ${{ matrix.platform.os }}
+    strategy:
+      matrix:
+        platform:
+          # FreeBSD
+          - os_name: FreeBSD-x86_64
+            os: ubuntu-latest
+            target: x86_64-unknown-freebsd
+            skip_tests: true
+          # Linux
+          - os_name: Linux-x86_64
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          - os_name: Linux-aarch64
+            os: ubuntu-latest
+            target: aarch64-unknown-linux-musl
+          - os_name: Linux-arm
+            os: ubuntu-latest
+            target: arm-unknown-linux-musleabi
+          # Windows
+          - os_name: windows-aarch64
+            os: windows-latest
+            target: aarch64-pc-windows-msvc
+            skip_tests: true
+          - os_name: windows-x86_64
+            os: windows-latest
+            target: x86_64-pc-windows-msvc
+          # MacOS
+          - os_name: macos-x86_64
+            os: macos-latest
+            target: x86_64-apple-darwin
+          - os_name: macos-aarch64
+            os: macos-latest
+            target: aarch64-apple-darwin
+            skip_tests: true
+        toolchain:
+          - stable
+          - nightly
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - if: contains(matrix.platform.target, 'musl')
+        name: Install musl-tools on Linux
+        run: sudo apt-get update --yes && sudo apt-get install --yes musl-tools
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: "rust"
+
+      - name: Build binary
+        uses: houseabsolute/actions-rust-cross@v0
+        with:
+          command: "build"
+          target: ${{ matrix.platform.target }}
+          toolchain: ${{ matrix.toolchain }}
+          args: "--release"
+          strip: false

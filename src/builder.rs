@@ -53,25 +53,22 @@ impl Fd {
                 let ident = g.next().unwrap();
                 if ident.to_string() == "env_config" {
                     let ident = g.next().unwrap();
-                    match ident {
-                        TokenTree::Group(g) => {
-                            let attrs = get_struct_attribute(g.stream());
-                            for item in attrs {
-                                match item.0.as_str() {
-                                    "name" => {
-                                        attr_name = item.1;
-                                    }
-                                    "default" => {
-                                        attr_default = item.1;
-                                    }
-                                    "help" => {
-                                        attr_help = item.1;
-                                    }
-                                    _ => {}
+                    if let TokenTree::Group(g) = ident {
+                        let attrs = get_struct_attribute(g.stream());
+                        for item in attrs {
+                            match item.0.as_str() {
+                                "name" => {
+                                    attr_name = item.1;
                                 }
+                                "default" => {
+                                    attr_default = item.1;
+                                }
+                                "help" => {
+                                    attr_help = item.1;
+                                }
+                                _ => {}
                             }
                         }
-                        _ => {}
                     }
                     break;
                 }

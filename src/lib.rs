@@ -37,15 +37,13 @@
 //!     bar: Option<i64>,
 //! }
 //!
-//! fn main() {
-//!     dotenv().ok();
-//!     let cfg = Config::init().unwrap();
-//!     println!("{:#?}", cfg);
+//! dotenv().ok();
+//! let cfg = Config::init().unwrap();
+//! println!("{:#?}", cfg);
 //! 
-//!     // print config help
-//!     let help = Config::get_help();
-//!     println!("{:#?}", help);
-//! }
+//! // print config help
+//! let help = Config::get_help();
+//! println!("{:#?}", help);
 //! ```
 //!
 //! ### attribute env_config

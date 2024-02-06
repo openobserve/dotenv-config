@@ -1,6 +1,27 @@
 use dotenv_config::EnvConfig;
 use dotenvy::dotenv;
 
+
+#[derive(Debug, PartialEq)]
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+impl std::str::FromStr for Color {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "red" => Ok(Color::Red),
+            "green" => Ok(Color::Green),
+            "blue" => Ok(Color::Blue),
+            _ => Err("no match color"),
+        }
+    }
+}
+
 #[derive(Debug, EnvConfig)]
 struct Config {
     #[env_config(default = "192.168.2.1")]
@@ -11,6 +32,8 @@ struct Config {
     #[env_config(name = "ZINC_NUMBER", default = 123456)]
     num: Option<i64>,
     rr: Redis,
+    #[env_config(parse, default="green")]
+    color: Color,
 }
 
 #[derive(Debug, EnvConfig)]
@@ -34,6 +57,7 @@ fn test_config() {
     assert!(cfg.rr.port.is_empty());
     assert!(cfg.rr.auth.is_empty());
     assert!(cfg.rr.timeout == 30i32);
+    assert!(cfg.color == Color::Green);
 
     let help_keys = Config::get_help();
     println!("help_keys: {:?}", help_keys);

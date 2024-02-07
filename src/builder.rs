@@ -36,7 +36,7 @@ struct Fd {
     attr_name: String,
     attr_default: String,
     attr_help: String, // new field for storing documentation comments
-    attr_parse: bool, // weather use FromStr trait to parse into a field
+    attr_parse: bool,  // whether use FromStr trait to parse into a field
 }
 
 impl Fd {
@@ -209,11 +209,11 @@ fn get_struct_attribute(input: TokenStream) -> Vec<(String, String)> {
         })
         .map(|tokens| {
             let token0 = tokens[0]
-                    .last()
-                    .unwrap()
-                    .to_string()
-                    .trim_matches(|c: char| c == '"' || c == '\'')
-                    .to_string();
+                .last()
+                .unwrap()
+                .to_string()
+                .trim_matches(|c: char| c == '"' || c == '\'')
+                .to_string();
             let token1 = if tokens.len() > 1 {
                 tokens[1]
                     .last()

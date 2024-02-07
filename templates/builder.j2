@@ -9,7 +9,7 @@ impl {{ name }} {
 
         {% for field in fields %}
         // If the field is a custom type, recursively get its help information.
-        {% if !contains(["usize", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64", "bool", "String"], field.typ)  %}
+        {% if !contains(["usize", "i16", "i32", "i64", "u16", "u32", "u64", "f32", "f64", "bool", "String"], field.typ) && !field.attr_parse %}
             let nested_help = {{ field.typ }}::get_help();
             for (nested_key, nested_value) in nested_help {
                 help_map.insert(nested_key, nested_value);
@@ -55,6 +55,17 @@ impl {{ name }} {
                 Some(Default::default())
                 {% else %}
                 Some("{{ field.attr_default }}".parse().unwrap())
+                {% endif %}
+            }
+        };
+        {% else if field.attr_parse %}
+        let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
+            Ok(val) => val.parse::<{{ field.typ }}>().ok(),
+            Err(_) => {
+                {% if field.attr_default.is_empty() %}
+                Default::default().parse::<{{ field.typ }}>().ok()
+                {% else %}
+                "{{ field.attr_default }}".parse::<{{ field.typ }}>().ok()
                 {% endif %}
             }
         };

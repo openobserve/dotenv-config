@@ -10,6 +10,26 @@ use `.env` as config file and parse environments to config struct.
 use dotenv_config::EnvConfig;
 use dotenvy::dotenv;
 
+#[derive(Debug, PartialEq)]
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+impl std::str::FromStr for Color {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "red" => Ok(Color::Red),
+            "green" => Ok(Color::Green),
+            "blue" => Ok(Color::Blue),
+            _ => Err("no match color"),
+        }
+    }
+}
+
 #[derive(Debug, EnvConfig)]
 struct Config {
     #[env_config(default = "192.168.2.1")]
@@ -19,6 +39,8 @@ struct Config {
     enable: bool,
     #[env_config(name = "ZINC_NUMBER", default = 123456, help = "this is for demo")]
     num: Option<i64>,
+    #[env_config(parse, default = "green")] // or parse=true
+    color: Color,
 }
 
 fn main() {

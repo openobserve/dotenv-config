@@ -36,6 +36,7 @@ struct Fd {
     attr_name: String,
     attr_default: String,
     attr_help: String, // new field for storing documentation comments
+    attr_parse: bool, // weather use FromStr trait to parse into a field
 }
 
 impl Fd {
@@ -47,6 +48,7 @@ impl Fd {
         let mut attr_name: String = String::from("");
         let mut attr_default: String = String::from("");
         let mut attr_help: String = String::from("");
+        let mut attr_parse: bool = false;
         for item in name {
             if let TokenTree::Group(g) = item {
                 let mut g = g.stream().into_iter();
@@ -65,6 +67,13 @@ impl Fd {
                                 }
                                 "help" => {
                                     attr_help = item.1;
+                                }
+                                "parse" => {
+                                    if item.1.is_empty() {
+                                        attr_parse = true;
+                                    } else {
+                                        attr_parse = item.1.parse().unwrap();
+                                    }
                                 }
                                 _ => {}
                             }
@@ -102,6 +111,7 @@ impl Fd {
                     attr_name,
                     attr_default,
                     attr_help,
+                    attr_parse,
                 }
             }
             e => panic!("Expect ident, but got {:?}", e),
@@ -197,22 +207,24 @@ fn get_struct_attribute(input: TokenStream) -> Vec<(String, String)> {
                 })
                 .collect::<Vec<_>>()
         })
-        .filter(|tokens| tokens.len() == 2)
         .map(|tokens| {
-            (
-                tokens[0]
+            let token0 = tokens[0]
                     .last()
                     .unwrap()
                     .to_string()
                     .trim_matches(|c: char| c == '"' || c == '\'')
-                    .to_string(),
+                    .to_string();
+            let token1 = if tokens.len() > 1 {
                 tokens[1]
                     .last()
                     .unwrap()
                     .to_string()
                     .trim_matches(|c: char| c == '"' || c == '\'')
-                    .to_string(),
-            )
+                    .to_string()
+            } else {
+                String::from("")
+            };
+            (token0, token1)
         })
         .collect()
 }

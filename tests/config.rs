@@ -1,7 +1,6 @@
 use dotenv_config::EnvConfig;
 use dotenvy::dotenv;
 
-
 #[derive(Debug, PartialEq)]
 enum Color {
     Red,
@@ -32,7 +31,7 @@ struct Config {
     #[env_config(name = "ZINC_NUMBER", default = 123456)]
     num: Option<i64>,
     rr: Redis,
-    #[env_config(parse, default="green")]
+    #[env_config(parse, default = "green")]
     color: Color,
 }
 

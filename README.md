@@ -39,7 +39,7 @@ struct Config {
     enable: bool,
     #[env_config(name = "ZINC_NUMBER", default = 123456, help = "this is for demo")]
     num: Option<i64>,
-    #[env_config(parse, default="green")] // or parse=true
+    #[env_config(parse, default = "green")] // or parse=true
     color: Color,
 }
 

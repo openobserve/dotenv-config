@@ -67,7 +67,7 @@ impl {{ name }} {
                 {% else %}
                 "{{ field.attr_default }}".parse::<{{ field.typ }}>().ok()
                 {% endif %}
-            },
+            }
         };
         {% else %}
         let {{ field.name }}: Option<{{ field.typ }}> = match {{ field.typ }}::init() {

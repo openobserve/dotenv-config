@@ -1,6 +1,6 @@
 [package]
 name = "dotenv_config"
-version = "0.1.9"
+version = "0.2.0"
 edition = "2021"
 authors = ["Hengfei Yang <hengfei.yang@gmail.com>"]
 description = "parse `env` to config struct for Rust"
@@ -20,4 +20,4 @@ askama = "0.12.1"      # Type-safe, compiled Jinja-like templates for Rust
 convert_case = "0.6.0" # Convert a string to snake_case, kebab-case, or camelCase
 
 [dev-dependencies]
-dotenvy = "0.15.6"
+dotenvy = "0.15.7"

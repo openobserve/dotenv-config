@@ -24,7 +24,7 @@ struct Redis {
 
 fn main() {
     dotenv().ok();
-    let cfg = Config::init().unwrap();
+    let cfg = Config::init().expect("config init error");
     println!("{:#?}", cfg);
     assert!(cfg.server_addr == "192.168.2.1");
     assert!(!cfg.server_mode);

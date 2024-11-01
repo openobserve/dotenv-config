@@ -80,7 +80,7 @@ mod builder;
 pub fn derive_env_config(input: TokenStream) -> TokenStream {
     // println!("{:#?}", input);
     builder::BuilderContext::render(input)
-        .unwrap()
+        .expect("render error")
         .parse()
-        .unwrap()
+        .expect("parse error")
 }

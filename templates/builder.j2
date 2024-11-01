@@ -25,7 +25,7 @@ impl {{ name }} {
         help_map
     }
     
-    pub fn init() -> Result<{{ name }}, String> {
+    pub fn init() -> Result<{{ name }}, &'static str> {
         let mut key: &str;
         {% for field in fields %}
         {% if field.attr_name.is_empty() %}
@@ -37,7 +37,9 @@ impl {{ name }} {
         let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
             Ok(val) => match val.to_lowercase().parse() {
                 Ok(v) => Some(v),
-                Err(_) => {return Err(format!("{}: except a value of [{{ field.typ }}]", key));},
+                Err(_) => {
+                    panic!("EnvConfig: {} except a value of [{{ field.typ }}]", key);
+                },
             },
             Err(err) => {
                 {% if field.attr_default.is_empty() %}
@@ -62,7 +64,9 @@ impl {{ name }} {
         let {{ field.name }}: Option<{{ field.typ }}> = match std::env::var(key) {
             Ok(val) => match val.parse::<{{ field.typ }}>() {
                 Ok(v) => Some(v),
-                Err(_) => {return Err(format!("{}: except a value of [{{ field.typ }}]", key));},
+                 Err(_) => {
+                    panic!("EnvConfig: {} except a value of [{{ field.typ }}]", key);
+                },
             },
             Err(_) => {
                 {% if field.attr_default.is_empty() %}

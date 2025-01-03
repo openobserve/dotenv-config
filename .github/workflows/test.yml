@@ -77,7 +77,7 @@ jobs:
 
       - if: ${{ !matrix.platform.skip_tests }}
         name: Run tests
-        uses: houseabsolute/actions-rust-cross@v0
+        uses: houseabsolute/actions-rust-cross@v1
         with:
           command: "test"
           target: ${{ matrix.platform.target }}

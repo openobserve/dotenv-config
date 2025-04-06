@@ -16,7 +16,7 @@ proc-macro = true
 
 [dependencies]
 anyhow = "1"
-askama = "0.12.1"      # Type-safe, compiled Jinja-like templates for Rust
+askama = "0.13.0"      # Type-safe, compiled Jinja-like templates for Rust
 convert_case = "0.6.0" # Convert a string to snake_case, kebab-case, or camelCase
 
 [dev-dependencies]

@@ -24,8 +24,16 @@ use std::collections::VecDeque;
 pub struct BuilderContext {
     name: String,
     fields: Vec<Fd>,
-    contains: fn(haystack: &[&str], needle: &str) -> bool,
-    uppersnake: fn(s: &str) -> String,
+}
+
+impl BuilderContext {
+    pub fn contains(&self, haystack: &[&str], needle: &str) -> bool {
+        haystack.contains(&needle)
+    }
+
+    pub fn uppersnake(&self, s: &str) -> String {
+        s.to_case(Case::UpperSnake)
+    }
 }
 
 #[derive(Debug, Default)]
@@ -127,8 +135,6 @@ impl BuilderContext {
         Self {
             name: name.to_string(),
             fields,
-            contains: |haystack, needle| haystack.contains(&needle),
-            uppersnake: |s| s.to_case(Case::UpperSnake),
         }
     }
 

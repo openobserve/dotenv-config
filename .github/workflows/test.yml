@@ -64,7 +64,7 @@ jobs:
           - nightly
     steps:
       - name: Checkout project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - if: contains(matrix.platform.target, 'musl')
         name: Install musl-tools on Linux

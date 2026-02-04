@@ -78,7 +78,6 @@ mod builder;
 
 #[proc_macro_derive(EnvConfig, attributes(env_config))]
 pub fn derive_env_config(input: TokenStream) -> TokenStream {
-    // println!("{:#?}", input);
     builder::BuilderContext::render(input)
         .expect("render error")
         .parse()

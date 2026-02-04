@@ -1,4 +1,4 @@
-/* Copyright 2022 Zinc Labs Inc. and Contributors
+/* Copyright 2026 OpenObserve Inc. and Contributors
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -149,10 +149,10 @@ impl BuilderContext {
 fn split(input: TokenStream) -> (Ident, TokenStream) {
     let mut input = input.into_iter().collect::<VecDeque<_>>();
     while let Some(item) = input.pop_front() {
-        if let TokenTree::Ident(v) = item {
-            if v.to_string() == "struct" {
-                break;
-            }
+        if let TokenTree::Ident(v) = item
+            && v.to_string() == "struct"
+        {
+            break;
         }
     }
 

@@ -1,4 +1,4 @@
-# Dot Env Config
+# Dotenv Config
 
 use `.env` as config file and parse environments to config struct.
 

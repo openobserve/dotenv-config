@@ -1,4 +1,4 @@
-name: Cross Test
+name: Cross Build
 
 on:
   push:
